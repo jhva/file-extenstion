@@ -1,24 +1,20 @@
 import React from 'react';
-import { RootContainerStyle } from './styles';
-import { LabelRootContainer } from '../components/label/styles';
+import { FlexWrapContainer, RootContainerStyle } from './styles';
 import LabelComponents from '../components/label';
 import CheckMapComponent from '../components/check';
 import { FILE_EXTENSION } from '../constants';
-import CustomExtension from '../components/customExtension/styles';
-import {
-  CustomInputs,
-  CustomInputsInputRadius5pxPadding10px,
-  CustomInputsInputRadius5pxPadding5px,
-} from '../components/inputs';
-import { GrayButtonFontSize10px } from '../components/button/styles';
-import {
-  ButtonGrayButtonFontSize10px,
-  ButtonGrayFontSize10px,
-} from '../components/button';
+
+import { ButtonGrayFontSize10px } from '../components/button';
 import { FlexAlignItemsCenter } from '../components/container/styles';
 import { InputRadius5pxPadding7px } from '../components/inputs/styles';
+import {
+  CustomBox,
+  CustomFileExtensionBoxStyle,
+} from '../components/box/styles';
 
 const Home = () => {
+  const FILELIST_MAX_SIZE = 200;
+
   return (
     <RootContainerStyle>
       <div>
@@ -36,11 +32,29 @@ const Home = () => {
       </LabelComponents>
       <LabelComponents label={'커스텀 확장자'}>
         <FlexAlignItemsCenter style={{ gap: '10px' }}>
-          <InputRadius5pxPadding7px placeholder={'확장자 입력'} />
+          <InputRadius5pxPadding7px
+            maxLength={'20'}
+            placeholder={'확장자 입력'}
+          />
           <ButtonGrayFontSize10px text={'+추가'} />
         </FlexAlignItemsCenter>
       </LabelComponents>
-      <LabelComponents label={''}></LabelComponents>
+      <LabelComponents label={''}>
+        <CustomBox>
+          <FlexWrapContainer>
+            <CustomFileExtensionBoxStyle>
+              <p>testes</p>
+              <span
+                onClick={() => {
+                  console.log('123');
+                }}
+              >
+                x
+              </span>
+            </CustomFileExtensionBoxStyle>
+          </FlexWrapContainer>
+        </CustomBox>
+      </LabelComponents>
     </RootContainerStyle>
   );
 };

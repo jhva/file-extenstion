@@ -7,7 +7,7 @@ const CheckMapComponent = ({ data }) => {
       {data.map((item, index) => (
         <FlexAlignItemsCenter key={index}>
           <input id={item.name} type={'checkbox'} />
-          <label for={item.name}>{item.name}</label>
+          <label htmlFor={item.name}>{item.name}</label>
         </FlexAlignItemsCenter>
       ))}
     </FlexContainer>

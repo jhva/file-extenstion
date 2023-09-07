@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexContainer } from '../components/container/styles';
 
 export const RootContainerStyle = styled.div`
   max-width: 1050px;
@@ -9,4 +10,10 @@ export const RootContainerStyle = styled.div`
   min-height: 100vh;
   padding: 20px;
   flex-direction: column;
+`;
+
+export const FlexWrapContainer = styled(FlexContainer)`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
