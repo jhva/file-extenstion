@@ -30,6 +30,7 @@ function App() {
         display: none;
       }
     }
+    
 
     button, input {
       outline: none;

@@ -7,4 +7,6 @@ export const RootContainerStyle = styled.div`
   background-color: #fff;
   margin: 0 auto;
   min-height: 100vh;
+  padding: 20px;
+  flex-direction: column;
 `;
