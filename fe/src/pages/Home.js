@@ -12,20 +12,24 @@ import {
   CustomFileExtensionBoxStyle,
 } from '../components/box/styles';
 import api from '../api/api';
-import { getCustomExtension, postCustomExtension } from '../api/fileExtension';
+import {
+  deleteCustomExtension,
+  getCustomExtension,
+  postCustomExtension,
+} from '../api/fileExtension';
 
 const Home = () => {
   const FILELIST_MAX_SIZE = 200;
 
   const [customExtensionInput, setCustomExtensionInput] = useState('');
-  const [getCustomExtensionData, setCustomExtensionData] = useState([]);
+  const [getCustomExtensionData, setGetCustomExtensionData] = useState([]);
   const onChangeCustomExtensionInput = (e) => {
     setCustomExtensionInput(e.target.value.trim());
   };
 
   const onClickPostExtension = async () => {
     let body = {
-      customExtensionName3: customExtensionInput,
+      customExtensionName: customExtensionInput,
     };
     if (getCustomExtensionData.length > 200) {
       alert('최대 허용 개수(200개)를 초과하였습니다.');
@@ -43,10 +47,18 @@ const Home = () => {
   };
   useEffect(() => {
     getCustomExtension().then((res) => {
-      setCustomExtensionData(res?.data?.data);
+      setGetCustomExtensionData(res?.data?.data);
     });
   }, [customExtensionInput]);
 
+  const onClickDeleteExtension = async (customFileId) => {
+    if (await deleteCustomExtension(customFileId)) {
+      alert('삭제 완료');
+      setGetCustomExtensionData(
+        getCustomExtensionData.filter((data) => data.id !== customFileId)
+      ); // 기존에 데이터를 삭제한다.
+    }
+  };
   return (
     <RootContainerStyle>
       <div>
@@ -84,7 +96,13 @@ const Home = () => {
             {getCustomExtensionData?.map((item, index) => (
               <CustomFileExtensionBoxStyle key={index}>
                 <p>{item?.customExtensionName}</p>
-                <span onClick={''}>x</span>
+                <span
+                  onClick={() => {
+                    onClickDeleteExtension(item?.id);
+                  }}
+                >
+                  x
+                </span>
               </CustomFileExtensionBoxStyle>
             ))}
           </FlexWrapContainer>
