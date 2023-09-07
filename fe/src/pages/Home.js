@@ -25,18 +25,21 @@ const Home = () => {
 
   const onClickPostExtension = async () => {
     let body = {
-      customExtensionName: customExtensionInput,
+      customExtensionName3: customExtensionInput,
     };
     if (getCustomExtensionData.length > 200) {
       alert('최대 허용 개수(200개)를 초과하였습니다.');
       return;
     }
-    postCustomExtension(body).then((res) => {
-      if (res.status === 201) {
-        alert('추가 완료');
-        setCustomExtensionInput('');
-      }
-    });
+    if (customExtensionInput === '') {
+      alert('확장자 이름을 입력해주세요');
+      return;
+    }
+
+    if (await postCustomExtension(body)) {
+      alert('추가 완료');
+      setCustomExtensionInput('');
+    }
   };
   useEffect(() => {
     getCustomExtension().then((res) => {
@@ -79,7 +82,7 @@ const Home = () => {
 
           <FlexWrapContainer>
             {getCustomExtensionData?.map((item, index) => (
-              <CustomFileExtensionBoxStyle>
+              <CustomFileExtensionBoxStyle key={index}>
                 <p>{item?.customExtensionName}</p>
                 <span onClick={''}>x</span>
               </CustomFileExtensionBoxStyle>
