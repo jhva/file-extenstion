@@ -16,7 +16,7 @@ app.use(corsMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/api/v1/", rootRouter);
+app.use("/api-v1/", rootRouter);
 app.use(notFoundMiddleware);
 
 app.listen(port, () => {

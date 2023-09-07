@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlexWrapContainer, RootContainerStyle } from './styles';
 import LabelComponents from '../components/label';
 import CheckMapComponent from '../components/check';
@@ -11,9 +11,27 @@ import {
   CustomBox,
   CustomFileExtensionBoxStyle,
 } from '../components/box/styles';
+import api from '../api/api';
+import { postCustomExtension } from '../api/fileExtension';
 
 const Home = () => {
   const FILELIST_MAX_SIZE = 200;
+
+  const [customExtensionInput, setCustomExtensionInput] = useState('');
+  const onChangeCustomExtensionInput = (e) => {
+    setCustomExtensionInput(e.target.value);
+  };
+
+  const onClickPostExtension = async () => {
+    let body = {
+      customExtensionName: customExtensionInput,
+    };
+    postCustomExtension(body).then((res) => {
+      if (res.status === 201) {
+        alert('추가 완료');
+      }
+    });
+  };
 
   return (
     <RootContainerStyle>
@@ -33,24 +51,25 @@ const Home = () => {
       <LabelComponents label={'커스텀 확장자'}>
         <FlexAlignItemsCenter style={{ gap: '10px' }}>
           <InputRadius5pxPadding7px
+            value={customExtensionInput}
+            onChange={onChangeCustomExtensionInput}
             maxLength={'20'}
             placeholder={'확장자 입력'}
           />
-          <ButtonGrayFontSize10px text={'+추가'} />
+          <ButtonGrayFontSize10px
+            onClick={onClickPostExtension}
+            text={'+추가'}
+          />
         </FlexAlignItemsCenter>
       </LabelComponents>
       <LabelComponents label={''}>
         <CustomBox>
+          <p>/{FILELIST_MAX_SIZE}</p>
+
           <FlexWrapContainer>
             <CustomFileExtensionBoxStyle>
               <p>testes</p>
-              <span
-                onClick={() => {
-                  console.log('123');
-                }}
-              >
-                x
-              </span>
+              <span onClick={''}>x</span>
             </CustomFileExtensionBoxStyle>
           </FlexWrapContainer>
         </CustomBox>

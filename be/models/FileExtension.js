@@ -4,15 +4,17 @@ module.exports = class FileExtension extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        customFileExtension: {
+        customExtensionName: {
           type: Sequelize.STRING(20),
-          allowNull: true,
+          allowNull: false,
           unique: false,
+          comment: "커스텀 확장자",
         },
-        fixFileExtensionIndex: {
+        fixFileExtensionJSON: {
           type: Sequelize.JSON,
           allowNull: true,
           unique: false,
+          comment: "고정 확장자",
         },
       },
       {
