@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlexWrapContainer, RootContainerStyle } from './styles';
 import LabelComponents from '../components/label';
 import CheckMapComponent from '../components/check';
@@ -12,26 +12,37 @@ import {
   CustomFileExtensionBoxStyle,
 } from '../components/box/styles';
 import api from '../api/api';
-import { postCustomExtension } from '../api/fileExtension';
+import { getCustomExtension, postCustomExtension } from '../api/fileExtension';
 
 const Home = () => {
   const FILELIST_MAX_SIZE = 200;
 
   const [customExtensionInput, setCustomExtensionInput] = useState('');
+  const [getCustomExtensionData, setCustomExtensionData] = useState([]);
   const onChangeCustomExtensionInput = (e) => {
-    setCustomExtensionInput(e.target.value);
+    setCustomExtensionInput(e.target.value.trim());
   };
 
   const onClickPostExtension = async () => {
     let body = {
       customExtensionName: customExtensionInput,
     };
+    if (getCustomExtensionData.length > 200) {
+      alert('최대 허용 개수(200개)를 초과하였습니다.');
+      return;
+    }
     postCustomExtension(body).then((res) => {
       if (res.status === 201) {
         alert('추가 완료');
+        setCustomExtensionInput('');
       }
     });
   };
+  useEffect(() => {
+    getCustomExtension().then((res) => {
+      setCustomExtensionData(res?.data?.data);
+    });
+  }, [customExtensionInput]);
 
   return (
     <RootContainerStyle>
@@ -67,10 +78,12 @@ const Home = () => {
           <p>/{FILELIST_MAX_SIZE}</p>
 
           <FlexWrapContainer>
-            <CustomFileExtensionBoxStyle>
-              <p>testes</p>
-              <span onClick={''}>x</span>
-            </CustomFileExtensionBoxStyle>
+            {getCustomExtensionData?.map((item, index) => (
+              <CustomFileExtensionBoxStyle>
+                <p>{item?.customExtensionName}</p>
+                <span onClick={''}>x</span>
+              </CustomFileExtensionBoxStyle>
+            ))}
           </FlexWrapContainer>
         </CustomBox>
       </LabelComponents>

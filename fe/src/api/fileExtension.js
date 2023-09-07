@@ -12,3 +12,15 @@ export const postCustomExtension = async (body) => {
 
   return result;
 };
+export const getCustomExtension = async (body) => {
+  let result;
+  try {
+    result = await api.get('/fileExtension', {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  return result;
+};
