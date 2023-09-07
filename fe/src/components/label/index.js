@@ -4,7 +4,9 @@ import { LabelRootContainer } from './styles';
 const LabelComponents = ({ children, label }) => {
   return (
     <LabelRootContainer>
-      <p>{label}</p>
+      <div style={{ maxWidth: '150px', width: '100%' }}>
+        <p>{label}</p>
+      </div>
       <div>{children}</div>
     </LabelRootContainer>
   );
