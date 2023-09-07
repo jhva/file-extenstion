@@ -13,7 +13,12 @@ const RES = (status, msg, res, data) => {
         status,
       });
       break;
-
+    case 400:
+      res.status(400).json({
+        msg: msg,
+        status,
+      });
+      break;
     default:
       break;
   }

@@ -23,6 +23,13 @@ const Home = () => {
 
   const [customExtensionInput, setCustomExtensionInput] = useState('');
   const [getCustomExtensionData, setGetCustomExtensionData] = useState([]);
+  const [fixFileExtensionData, setFixFileExtensionData] = useState([]);
+  useEffect(() => {
+    getCustomExtension().then((res) => {
+      setGetCustomExtensionData(res?.data?.data);
+    });
+  }, [customExtensionInput]);
+
   const onChangeCustomExtensionInput = (e) => {
     setCustomExtensionInput(e.target.value.trim());
   };
@@ -31,7 +38,7 @@ const Home = () => {
     let body = {
       customExtensionName: customExtensionInput,
     };
-    if (getCustomExtensionData.length > 200) {
+    if (getCustomExtensionData?.length > 200) {
       alert('최대 허용 개수(200개)를 초과하였습니다.');
       return;
     }
@@ -42,15 +49,13 @@ const Home = () => {
 
     if (await postCustomExtension(body)) {
       alert('추가 완료');
-      setCustomExtensionInput('');
     }
+    setCustomExtensionInput('');
   };
-  useEffect(() => {
-    getCustomExtension().then((res) => {
-      setGetCustomExtensionData(res?.data?.data);
-    });
-  }, [customExtensionInput]);
 
+  const onClickFixFileExtension = (file) => {
+    console.log(file);
+  };
   const onClickDeleteExtension = async (customFileId) => {
     if (await deleteCustomExtension(customFileId)) {
       alert('삭제 완료');
@@ -72,7 +77,10 @@ const Home = () => {
       </div>
 
       <LabelComponents label={'고정 확장자'}>
-        <CheckMapComponent data={FILE_EXTENSION} />
+        <CheckMapComponent
+          onClickFixFileExtension={onClickFixFileExtension}
+          data={FILE_EXTENSION}
+        />
       </LabelComponents>
       <LabelComponents label={'커스텀 확장자'}>
         <FlexAlignItemsCenter style={{ gap: '10px' }}>
@@ -90,22 +98,35 @@ const Home = () => {
       </LabelComponents>
       <LabelComponents label={''}>
         <CustomBox>
-          <p>/{FILELIST_MAX_SIZE}</p>
+          <div>
+            <p>
+              {getCustomExtensionData?.length}/{FILELIST_MAX_SIZE}
+            </p>
 
-          <FlexWrapContainer>
-            {getCustomExtensionData?.map((item, index) => (
-              <CustomFileExtensionBoxStyle key={index}>
-                <p>{item?.customExtensionName}</p>
-                <span
-                  onClick={() => {
-                    onClickDeleteExtension(item?.id);
-                  }}
-                >
-                  x
-                </span>
-              </CustomFileExtensionBoxStyle>
-            ))}
-          </FlexWrapContainer>
+            {getCustomExtensionData?.length === 0 && (
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                현재 데이터가 존재하지 않습니다.
+              </div>
+            )}
+            <FlexWrapContainer>
+              {getCustomExtensionData?.map((item, index) => (
+                <CustomFileExtensionBoxStyle key={index}>
+                  <p>{item?.customExtensionName}</p>
+                  <span
+                    onClick={() => {
+                      onClickDeleteExtension(item?.id);
+                    }}
+                  >
+                    x
+                  </span>
+                </CustomFileExtensionBoxStyle>
+              ))}
+            </FlexWrapContainer>
+          </div>
         </CustomBox>
       </LabelComponents>
     </RootContainerStyle>

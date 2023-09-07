@@ -3,14 +3,12 @@ import api from './api';
 export const postCustomExtension = async (body) => {
   let result;
   try {
-    result = await api.post('/fileExtension', body, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    result = await api.post('/fileExtension', body);
+    console.log(result);
   } catch (e) {
     alert(e?.response?.data?.msg);
     result = false;
   }
-
   return result;
 };
 export const getCustomExtension = async () => {

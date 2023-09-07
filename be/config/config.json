@@ -4,7 +4,7 @@
     "password": "1234",
     "database": "flow",
     "host": "svc.sel5.cloudtype.app",
-    "port": "31843",
+    "port": "30428",
     "dialect": "mysql"
   },
   "test": {},
@@ -13,7 +13,7 @@
     "password": "1234",
     "database": "flow",
     "host": "svc.sel5.cloudtype.app",
-    "port": "31843",
+    "port": "30428",
     "dialect": "mysql"
   }
 }

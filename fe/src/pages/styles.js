@@ -15,5 +15,8 @@ export const RootContainerStyle = styled.div`
 export const FlexWrapContainer = styled(FlexContainer)`
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
+
   gap: 10px;
+  height: 100%;
 `;

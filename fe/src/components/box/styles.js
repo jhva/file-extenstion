@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CustomBox = styled.div`
   min-height: 350px;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   border-radius: 5px;
   max-width: 500px;
   width: 500px;
@@ -12,10 +12,9 @@ export const CustomBox = styled.div`
 `;
 export const CustomFileExtensionBoxStyle = styled.div`
   border-radius: 5px;
-  width: 80px;
-  display: flex;
   align-items: center;
   padding: 10px;
+  display: flex;
 
   border: 1px solid #ececec;
   overflow-y: scroll;

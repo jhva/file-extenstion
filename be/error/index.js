@@ -4,6 +4,10 @@ const ERROR = (status, res, msg) => {
       res.status(500).json({
         msg: msg,
       });
+    case 400:
+      res.status(400).json({
+        msg: msg,
+      });
       break;
   }
 };
