@@ -24,11 +24,12 @@ const Home = () => {
   const [customExtensionInput, setCustomExtensionInput] = useState('');
   const [getCustomExtensionData, setGetCustomExtensionData] = useState([]);
   const [fixFileExtensionData, setFixFileExtensionData] = useState([]);
+
   useEffect(() => {
     getCustomExtension().then((res) => {
       setGetCustomExtensionData(res?.data?.data);
     });
-  }, [customExtensionInput]);
+  }, []);
 
   const onChangeCustomExtensionInput = (e) => {
     setCustomExtensionInput(e.target.value.trim());
@@ -49,7 +50,23 @@ const Home = () => {
 
     if (await postCustomExtension(body)) {
       alert('추가 완료');
+
+      body.id = getCustomExtensionData[0].id + 1;
+      /*데이터의 삭제가 id 기준으로 삭제되기때문에
+       데이터가 삭제 or 추가될때마다 새로고침 을 통해서 데이터를 불러오는게 불필요하다 판단,
+       이후 데이터가 추가되는게 if 블록안에 타게될경우 기존에 데이터를 복사하여
+      POST 요청시 추가했던 body 객체에 id 프로퍼티를 넣어줌
+       id가 [0]번째 데이터에서 가져와 +1을 한 이유  : 최신순으로 넣어줘야하기때문에 unshift 는   요소를 배열의 맨 앞쪽에 추가해주기때문에 최신순 유지해주고,
+        +1을 해주는경우는 [0].id 기준으로 +1 을해주면 id+1이 들어가기때문에  문제가 없다라고 판단
+       */
+
+      setGetCustomExtensionData((prev) => {
+        let newData = Object.assign([], prev);
+        newData.unshift(body);
+        return newData;
+      });
     }
+
     setCustomExtensionInput('');
   };
 
