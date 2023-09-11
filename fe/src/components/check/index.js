@@ -1,17 +1,24 @@
 import React from 'react';
 import { FlexAlignItemsCenter, FlexContainer } from '../container/styles';
 
-const CheckMapComponent = ({ data, onClickFixFileExtension }) => {
+const CheckMapComponent = ({
+  onClickFixFileExtension,
+  checkedList,
+  setCheckedList,
+  data,
+}) => {
   return (
     <FlexContainer style={{ gap: '10px' }}>
       {data.map((item, index) => (
         <FlexAlignItemsCenter key={index}>
           <input
-            onClick={() => {
-              onClickFixFileExtension(item.name);
+            onChange={(e) => {
+              onClickFixFileExtension(e);
             }}
-            id={item.name}
             type={'checkbox'}
+            id={item.name}
+            value={item.name}
+            checked={checkedList.includes(item.name)}
           />
           <label htmlFor={item.name}>{item.name}</label>
         </FlexAlignItemsCenter>

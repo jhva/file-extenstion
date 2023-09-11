@@ -5,4 +5,6 @@ router.post("", controllers.postFileExtension);
 router.get("", controllers.getFileExtension);
 router.delete("/:id", controllers.deleteFileExtension);
 
+router.post("/fix", controllers.postFixFileExtension);
+
 module.exports = router;
