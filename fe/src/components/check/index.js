@@ -9,18 +9,18 @@ const CheckMapComponent = ({
 }) => {
   return (
     <FlexContainer style={{ gap: '10px' }}>
-      {data.map((item, index) => (
+      {data?.map((item, index) => (
         <FlexAlignItemsCenter key={index}>
           <input
             onChange={(e) => {
               onClickFixFileExtension(e);
             }}
             type={'checkbox'}
-            id={item.name}
-            value={item.name}
-            checked={checkedList.includes(item.name)}
+            id={item?.name}
+            value={item?.name || ''}
+            checked={checkedList?.includes(item?.name)}
           />
-          <label htmlFor={item.name}>{item.name}</label>
+          <label htmlFor={item?.name}>{item?.name}</label>
         </FlexAlignItemsCenter>
       ))}
     </FlexContainer>

@@ -38,7 +38,7 @@ const Home = () => {
       await postFixFileExtension(checkedList);
     };
 
-    if (checkedList.length > 0) {
+    if (checkedList?.length > 0) {
       postData();
     }
   }, [checkedList]);
@@ -47,10 +47,10 @@ const Home = () => {
       const data = res?.data?.data;
       setCheckedList(data);
     });
-  }, [checkedList]);
+  }, []);
 
   const onChangeCustomExtensionInput = (e) => {
-    setCustomExtensionInput(e.target.value.trim());
+    setCustomExtensionInput(e?.target?.value?.trim());
   };
 
   const onClickPostExtension = async () => {
@@ -69,7 +69,7 @@ const Home = () => {
     if (await postCustomExtension(body)) {
       alert('추가 완료');
 
-      body.id = getCustomExtensionData[0].id + 1;
+      body.id = getCustomExtensionData[0]?.id + 1;
       /**
        * 데이터의 삭제가 id 기준으로 삭제되기때문에
        * 데이터가 삭제 or 추가될때마다 새로고침 을 통해서 데이터를 불러오는게 불필요하다 판단,
@@ -91,9 +91,9 @@ const Home = () => {
 
   const onClickFixFileExtension = (e) => {
     if (!e.target.checked) {
-      setCheckedList(checkedList.filter((el) => el !== e.target.value));
+      setCheckedList(checkedList?.filter((el) => el !== e?.target?.value));
     } else {
-      setCheckedList([...checkedList, e.target.value]);
+      setCheckedList([...checkedList, e?.target?.value]);
     }
   };
 
@@ -101,7 +101,7 @@ const Home = () => {
     if (await deleteCustomExtension(customFileId)) {
       alert('삭제 완료');
       setGetCustomExtensionData(
-        getCustomExtensionData.filter((data) => data.id !== customFileId)
+        getCustomExtensionData.filter((data) => data?.id !== customFileId)
       ); // 기존에 데이터를 삭제한다.
     }
   };

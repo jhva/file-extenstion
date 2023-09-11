@@ -1,3 +1,4 @@
 .idea
-be/config/config.json
+be/config/config.js
 fe/.env
+be/.env
