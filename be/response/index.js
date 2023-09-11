@@ -11,6 +11,7 @@ const RES = (status, msg, res, data) => {
       res.status(201).json({
         msg: msg,
         status,
+        data,
       });
       break;
     case 400:

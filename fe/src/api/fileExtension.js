@@ -4,7 +4,6 @@ export const postCustomExtension = async (body) => {
   let result;
   try {
     result = await api.post('/fileExtension', body);
-    console.log(result);
   } catch (e) {
     alert(e?.response?.data?.msg);
     result = false;

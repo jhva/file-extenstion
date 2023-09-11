@@ -14,11 +14,11 @@ module.exports = async (req, res) => {
       RES(400, "이미 존재하는 확장자 입니다.", res);
       return;
     }
-    await FileExtension.create({
+    const data = await FileExtension.create({
       customExtensionName,
     });
 
-    RES(201, "success", res);
+    RES(201, "success", res, data.id);
   } catch (e) {
     ERROR(500, res, "sever error");
   }

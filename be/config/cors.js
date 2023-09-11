@@ -9,11 +9,11 @@ const corsMiddleware = (req, res, next) => {
   );
   res.header("Access-Control-Allow-Credentials", true);
 
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // 특정 도메인 배열로 지정
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Origin",
     "https://web-file-extenstion-jvvy2blm9hzkrv.sel5.cloudtype.app",
-  ); // 특정 도메인 배열로 지정
+  );
 
   next();
 };
