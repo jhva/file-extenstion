@@ -3,7 +3,6 @@ const { RES } = require("../../response");
 const FixFileExtension = require("../../models/FixFileExtension");
 module.exports = async (req, res) => {
   let fixFile = req.body;
-  console.log(fixFile);
   try {
     const original = await FixFileExtension.findOne({
       where: { id: 1 },

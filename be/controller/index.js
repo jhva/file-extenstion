@@ -4,4 +4,5 @@ module.exports = {
   deleteFileExtension: require("./file/deleteFileExtension"),
 
   postFixFileExtension: require("./file/postFixFileExtension"),
+  getFixFileExtension: require("./file/getFixFileExtension"),
 };

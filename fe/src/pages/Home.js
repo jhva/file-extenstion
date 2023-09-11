@@ -15,6 +15,7 @@ import api from '../api/api';
 import {
   deleteCustomExtension,
   getCustomExtension,
+  getFixFileExtension,
   postCustomExtension,
   postFixFileExtension,
 } from '../api/fileExtension';
@@ -26,6 +27,7 @@ const Home = () => {
   const [getCustomExtensionData, setGetCustomExtensionData] = useState([]);
 
   const [checkedList, setCheckedList] = useState([]);
+
   useEffect(() => {
     getCustomExtension().then((res) => {
       setGetCustomExtensionData(res?.data?.data);
@@ -33,15 +35,20 @@ const Home = () => {
   }, [checkedList]);
   useEffect(() => {
     const postData = async () => {
-      if (await postFixFileExtension(checkedList)) {
-        console.log('123');
-      }
+      await postFixFileExtension(checkedList);
     };
 
     if (checkedList.length > 0) {
       postData();
     }
   }, [checkedList]);
+  useEffect(() => {
+    getFixFileExtension(setCheckedList).then((res) => {
+      const data = res?.data?.data;
+      setCheckedList(data);
+    });
+  }, [checkedList]);
+
   const onChangeCustomExtensionInput = (e) => {
     setCustomExtensionInput(e.target.value.trim());
   };

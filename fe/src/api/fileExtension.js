@@ -51,3 +51,15 @@ export const postFixFileExtension = async (body) => {
 
   return result;
 };
+export const getFixFileExtension = async () => {
+  let result;
+  try {
+    result = await api.get('/fileExtension/fix', {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e) {
+    alert(e?.response?.data?.msg);
+    result = false;
+  }
+  return result;
+};
