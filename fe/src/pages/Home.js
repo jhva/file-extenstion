@@ -38,9 +38,7 @@ const Home = () => {
       await postFixFileExtension(checkedList);
     };
 
-    if (checkedList?.length > 0) {
-      postData();
-    }
+    postData();
   }, [checkedList]);
   useEffect(() => {
     getFixFileExtension(setCheckedList).then((res) => {
@@ -49,6 +47,7 @@ const Home = () => {
     });
   }, []);
 
+  console.log(checkedList);
   const onChangeCustomExtensionInput = (e) => {
     setCustomExtensionInput(e?.target?.value?.trim());
   };

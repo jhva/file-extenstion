@@ -39,6 +39,7 @@ export const deleteCustomExtension = async (id) => {
 };
 
 export const postFixFileExtension = async (body) => {
+  console.log(body);
   let result;
   try {
     result = await api.post('/fileExtension/fix', body, {
